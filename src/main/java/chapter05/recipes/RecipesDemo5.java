@@ -23,41 +23,38 @@ import java.util.concurrent.CountDownLatch;
  * 生成订单号为17:04:10 | 942
  */
 public class RecipesDemo5 {
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    static final RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    static final CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)
             .retryPolicy(policy)
             .build();
 
-    static String path = "/zk-RecipesDemo5";
+    static final String path = "/zk-RecipesDemo5";
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         curatorFramework.start();
         final InterProcessMutex interProcessMutex = new InterProcessMutex(curatorFramework, path);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         for (int i = 0; i < 10; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        countDownLatch.await();
-                        interProcessMutex.acquire();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            new Thread(() -> {
+                try {
+                    countDownLatch.await();
+                    interProcessMutex.acquire();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss | SSS");
-                    String format = simpleDateFormat.format(new Date());
-                    System.out.println("生成订单号为" + format);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss | SSS");
+                String format = simpleDateFormat.format(new Date());
+                System.out.println("生成订单号为" + format);
 
-                    try {
-                        interProcessMutex.release();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    interProcessMutex.release();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }).start();
         }

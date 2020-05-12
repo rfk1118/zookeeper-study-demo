@@ -10,15 +10,15 @@ import org.apache.zookeeper.CreateMode;
 import java.util.concurrent.TimeUnit;
 
 public class RecipesDemo2 {
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    static final RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    static final CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)
             .retryPolicy(policy)
             .build();
 
-    static String path = "/zk-RecipesDemo22";
+    static final String path = "/zk-RecipesDemo22";
 
     public static void main(String[] args) throws Exception {
         curatorFramework.start();

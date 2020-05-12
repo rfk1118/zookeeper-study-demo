@@ -12,14 +12,11 @@ public class RecipesDemo8 {
 
     static DistributedBarrier barrier;
 
-    static String path = "/zk-RecipesDemo8";
+    static final String path = "/zk-RecipesDemo8";
 
     static class Runner implements Runnable {
 
-        private String name;
-
-        Runner(String name) {
-            this.name = name;
+        Runner() {
         }
 
         @Override
@@ -47,7 +44,7 @@ public class RecipesDemo8 {
 
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < 3; i++) {
-            new Thread(new Runner("" + i)).start();
+            new Thread(new Runner()).start();
             Thread.sleep(2000);
         }
         barrier.removeBarrier();

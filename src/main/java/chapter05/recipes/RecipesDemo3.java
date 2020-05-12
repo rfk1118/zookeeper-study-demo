@@ -20,15 +20,15 @@ import java.util.concurrent.TimeUnit;
  * 杀掉进程
  */
 public class RecipesDemo3 {
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    static final RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    static final CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)
             .retryPolicy(policy)
             .build();
 
-    static String path = "/zk-RecipesDemo3-master";
+    static final String path = "/zk-RecipesDemo3-master";
 
     public static void main(String[] args) throws Exception {
         curatorFramework.start();

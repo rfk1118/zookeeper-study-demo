@@ -68,7 +68,7 @@ public class ExistApiSyncUsage implements Watcher {
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

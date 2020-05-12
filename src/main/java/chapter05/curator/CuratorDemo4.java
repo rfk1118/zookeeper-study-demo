@@ -8,8 +8,8 @@ import org.apache.zookeeper.CreateMode;
 
 public class CuratorDemo4 {
 
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    static final RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    static final CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)

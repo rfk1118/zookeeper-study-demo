@@ -8,15 +8,15 @@ import org.apache.zookeeper.data.Stat;
 
 public class CuratorDemo5 {
 
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    final static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    final static CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)
             .retryPolicy(policy)
             .build();
 
-    static String path = "/zk-book/c1";
+    static final String path = "/zk-book/c1";
 
     public static void main(String[] args) throws Exception {
         curatorFramework.start();
@@ -26,7 +26,7 @@ public class CuratorDemo5 {
             e.printStackTrace();
         }
 
-        curatorFramework.create().creatingParentContainersIfNeeded().forPath(path,"helloworld".getBytes());
+        curatorFramework.create().creatingParentContainersIfNeeded().forPath(path,"helloWorld".getBytes());
 
         Stat stat = new Stat();
         curatorFramework.getData().storingStatIn(stat).forPath(path);

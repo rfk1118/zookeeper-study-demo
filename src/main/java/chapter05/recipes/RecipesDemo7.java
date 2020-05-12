@@ -17,7 +17,7 @@ public class RecipesDemo7 {
 
     static class Runner implements Runnable {
 
-        private String name;
+        private final String name;
 
         Runner(String name) {
             this.name = name;
@@ -37,7 +37,7 @@ public class RecipesDemo7 {
 
     public static final CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         executorService.submit(new Runner("种子选手1号"));
         executorService.submit(new Runner("种子选手2号"));

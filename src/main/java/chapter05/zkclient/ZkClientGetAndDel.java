@@ -14,11 +14,11 @@ public class ZkClientGetAndDel {
         client.createEphemeral(path,"123");
         client.subscribeDataChanges(path, new IZkDataListener() {
             @Override
-            public void handleDataChange(String s, Object o) throws Exception {
+            public void handleDataChange(String s, Object o) {
                 System.out.println("handleDataChange" + s + "," + o);
             }
             @Override
-            public void handleDataDeleted(String s) throws Exception {
+            public void handleDataDeleted(String s) {
                 System.out.println("handleDataDeleted" + s);
             }
         });

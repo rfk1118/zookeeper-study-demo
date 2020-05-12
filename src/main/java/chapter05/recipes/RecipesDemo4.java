@@ -22,23 +22,20 @@ public class RecipesDemo4 {
 
     final static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        countDownLatch.await();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss | SSS");
-                    String format = simpleDateFormat.format(new Date());
-                    System.out.println("生成订单号为" + format);
-
+            new Thread(() -> {
+                try {
+                    countDownLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss | SSS");
+                String format = simpleDateFormat.format(new Date());
+                System.out.println("生成订单号为" + format);
+
             }).start();
 
             countDownLatch.countDown();

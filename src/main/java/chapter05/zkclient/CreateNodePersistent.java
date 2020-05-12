@@ -11,7 +11,7 @@ public class CreateNodePersistent {
         ZkClient client = new ZkClient("localhost:2181", 5000);
         System.out.println(client);
         String path = "/hello/world";
-        client.createPersistent(path + "/hehe", true);
+        client.createPersistent(path + "/helloWorld", true);
         List<String> children = client.getChildren(path);
         System.out.println(children);
         try {

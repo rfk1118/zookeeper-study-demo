@@ -18,15 +18,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class UpdateDataWithCallBack {
 
-    private static CountDownLatch countDownLatch = new CountDownLatch(1);
-
-    private static ZooKeeper zooKeeper;
+    private static final CountDownLatch countDownLatch = new CountDownLatch(1);
 
 
     public static void main(String[] args) {
         final String path = "/" + GetDataApiWithSync.class.getSimpleName() + new Random().nextInt(100000);
         try {
-            zooKeeper = new ZooKeeper("localhost:2181", 5000, new ZookeeperWatcher(countDownLatch));
+            ZooKeeper zooKeeper = new ZooKeeper("localhost:2181", 5000, new ZookeeperWatcher(countDownLatch));
 
             // wait
             countDownLatch.await();

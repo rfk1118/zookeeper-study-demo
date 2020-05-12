@@ -11,14 +11,11 @@ import java.time.LocalTime;
 public class RecipesDemo9 {
 
 
-    static String path = "/zk-RecipesDemo9";
+    static final String path = "/zk-RecipesDemo9";
 
     static class Runner implements Runnable {
 
-        private String name;
-
-        Runner(String name) {
-            this.name = name;
+        Runner() {
         }
 
         @Override
@@ -47,9 +44,9 @@ public class RecipesDemo9 {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         for (int i = 0; i < 6; i++) {
-            new Thread(new Runner("" + i)).start();
+            new Thread(new Runner()).start();
         }
 
     }

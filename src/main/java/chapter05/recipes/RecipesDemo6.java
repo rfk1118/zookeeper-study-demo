@@ -9,15 +9,15 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.retry.RetryNTimes;
 
 public class RecipesDemo6 {
-    static RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
-    static CuratorFramework curatorFramework = CuratorFrameworkFactory
+    static final RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);
+    static final CuratorFramework curatorFramework = CuratorFrameworkFactory
             .builder()
             .connectString("localhost:2181")
             .sessionTimeoutMs(5000)
             .retryPolicy(policy)
             .build();
 
-    static String path = "/zk-RecipesDemo6";
+    static final String path = "/zk-RecipesDemo6";
 
 
     public static void main(String[] args) throws Exception {

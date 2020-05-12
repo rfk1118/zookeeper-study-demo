@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class GetDataApiWhitSyncListener implements Watcher {
 
-    private static CountDownLatch countDownLatch = new CountDownLatch(1);
+    private static final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     private static ZooKeeper zooKeeper;
 
-    private static Stat stat = new Stat();
+    private static final Stat stat = new Stat();
 
     public static void main(String[] args) {
         String path = "/" + GetDataApiWithSync.class.getSimpleName() + new Random().nextInt(100000);
@@ -32,6 +32,7 @@ public class GetDataApiWhitSyncListener implements Watcher {
             zooKeeper.setData(path, "123".getBytes(), -1);
             TimeUnit.MINUTES.sleep(10);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
