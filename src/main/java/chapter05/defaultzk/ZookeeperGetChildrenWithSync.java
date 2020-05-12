@@ -1,4 +1,4 @@
-package chapter05;
+package chapter05.defaultzk;
 
 import chapter05.listener.ZookeeperWatcherCallBack;
 import org.apache.zookeeper.AsyncCallback;

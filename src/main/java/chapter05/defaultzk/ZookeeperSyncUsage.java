@@ -1,5 +1,4 @@
-package chapter05;
-
+package chapter05.defaultzk;
 import chapter05.listener.ZookeeperWatcher;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
